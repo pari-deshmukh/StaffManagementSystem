@@ -18,20 +18,27 @@ public class EmployeeFactory {
             return null;
         }
         
-        Employee emp = null;
-        
-        emp.setId(id);
-        emp.setName(name);
-        emp.setEmail(email);
-        emp.setAddress(address);
-        emp.setDoj(doj);
-        
         if(empType.equalsIgnoreCase("Part-time")) {
-            emp = new PartTimeEmployee();
+            PartTimeEmployee emp = new PartTimeEmployee();
+            if(id >= 0) {
+                emp.setId(id);
+            }
+            emp.setName(name);
+            emp.setEmail(email);
+            emp.setAddress(address);
+            emp.setDoj(doj);
             emp.setType("Part-time");
             return emp;
-        } else if(empType.equalsIgnoreCase("Full-time")) {
-            emp = new FullTimeEmployee();
+        } 
+        else if(empType.equalsIgnoreCase("Full-time")) {
+            FullTimeEmployee emp = new FullTimeEmployee();
+            if(id >= 0) {
+                emp.setId(id);
+            }
+            emp.setName(name);
+            emp.setEmail(email);
+            emp.setAddress(address);
+            emp.setDoj(doj);
             emp.setType("Full-time");
             return emp;
         }

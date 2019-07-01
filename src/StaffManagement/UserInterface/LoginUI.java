@@ -15,7 +15,6 @@ public class LoginUI extends javax.swing.JFrame {
 
     private int xx;
     private int xy;
-    private boolean maximized = true;
     
     /**
      * Creates new form LoginUI
@@ -25,6 +24,13 @@ public class LoginUI extends javax.swing.JFrame {
         this.showLogin();
     }
 
+    private void showLogin() {
+        this.reset_password_form_pnl.setVisible(false);
+        this.login_form_pnl.setVisible(true);
+        this.back.setVisible(false);
+        this.emp_mgmt_login_lbl.setText("Login");
+        l_error_lbl.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,7 +55,6 @@ public class LoginUI extends javax.swing.JFrame {
         l_password_input = new javax.swing.JPasswordField();
         l_forgot_password_lbl = new javax.swing.JLabel();
         l_error_lbl = new javax.swing.JLabel();
-        login_btn_pnl = new javax.swing.JPanel();
         login_btn_lbl = new javax.swing.JLabel();
         reset_password_form_pnl = new javax.swing.JPanel();
         rp_username_input = new javax.swing.JTextField();
@@ -132,7 +137,7 @@ public class LoginUI extends javax.swing.JFrame {
         );
 
         login_pnl.add(sidebar);
-        sidebar.setBounds(0, 0, 260, 0);
+        sidebar.setBounds(0, 0, 260, 566);
 
         exit_pnl.setBackground(new java.awt.Color(0, 102, 204));
         exit_pnl.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -222,10 +227,7 @@ public class LoginUI extends javax.swing.JFrame {
         login_form_pnl.add(l_error_lbl);
         l_error_lbl.setBounds(65, 503, 650, 30);
 
-        login_btn_pnl.setBackground(new java.awt.Color(0, 102, 204));
-        login_btn_pnl.setForeground(new java.awt.Color(255, 255, 255));
-        login_btn_pnl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
+        login_btn_lbl.setBackground(new java.awt.Color(0, 102, 204));
         login_btn_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         login_btn_lbl.setForeground(new java.awt.Color(255, 255, 255));
         login_btn_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -233,6 +235,8 @@ public class LoginUI extends javax.swing.JFrame {
         login_btn_lbl.setAlignmentY(0.0F);
         login_btn_lbl.setFocusCycleRoot(true);
         login_btn_lbl.setName("login_btn"); // NOI18N
+        login_btn_lbl.setOpaque(true);
+        login_btn_lbl.setPreferredSize(new java.awt.Dimension(320, 50));
         login_btn_lbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 login_btn_lblMouseClicked(evt);
@@ -243,22 +247,8 @@ public class LoginUI extends javax.swing.JFrame {
                 login_btn_lblKeyReleased(evt);
             }
         });
-
-        javax.swing.GroupLayout login_btn_pnlLayout = new javax.swing.GroupLayout(login_btn_pnl);
-        login_btn_pnl.setLayout(login_btn_pnlLayout);
-        login_btn_pnlLayout.setHorizontalGroup(
-            login_btn_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(login_btn_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-        );
-        login_btn_pnlLayout.setVerticalGroup(
-            login_btn_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, login_btn_pnlLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(login_btn_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        login_form_pnl.add(login_btn_pnl);
-        login_btn_pnl.setBounds(220, 363, 0, 0);
+        login_form_pnl.add(login_btn_lbl);
+        login_btn_lbl.setBounds(220, 363, 320, 50);
 
         login_pnl.add(login_form_pnl);
         login_form_pnl.setBounds(260, 0, 780, 566);
@@ -470,13 +460,6 @@ public class LoginUI extends javax.swing.JFrame {
         this.showLogin();
     }//GEN-LAST:event_backMouseClicked
 
-    private void showLogin() {
-        this.reset_password_form_pnl.setVisible(false);
-        this.login_form_pnl.setVisible(true);
-        this.back.setVisible(false);
-        this.emp_mgmt_login_lbl.setText("Login");
-        l_error_lbl.setText("");
-    }
     /**
      * @param args the command line arguments
      */
@@ -526,7 +509,6 @@ public class LoginUI extends javax.swing.JFrame {
     private javax.swing.JTextField l_username_input;
     private javax.swing.JLabel l_username_lbl;
     private javax.swing.JLabel login_btn_lbl;
-    private javax.swing.JPanel login_btn_pnl;
     private javax.swing.JPanel login_form_pnl;
     private javax.swing.JPanel login_pnl;
     private javax.swing.JPanel reset_password_form_pnl;

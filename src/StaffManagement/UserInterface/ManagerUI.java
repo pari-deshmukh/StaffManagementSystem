@@ -8,6 +8,7 @@ package StaffManagement.UserInterface;
 import StaffManagement.BusinessLogic.EmployeeManagement.AddEmployeeController;
 import StaffManagement.BusinessLogic.EmployeeManagement.DeleteEmployeeController;
 import StaffManagement.BusinessLogic.EmployeeManagement.ListEmployeesController;
+import StaffManagement.BusinessLogic.EmployeeManagement.UpdateEmployeeController;
 import StaffManagement.DataPersistence.EmployeeRepoImpl;
 import java.awt.Color;
 import java.awt.Component;
@@ -39,6 +40,23 @@ public class ManagerUI extends javax.swing.JFrame {
      */
     public ManagerUI() {
         initComponents();
+        DefaultTableModel etm = (DefaultTableModel)employee_list_tbl.getModel();
+        ListEmployeesController.listEmployees(etm);
+        if (emp_type_full_rdo_btn.isSelected()) {
+            emp_rate_lbl.setVisible(false);
+            emp_rate_input.setVisible(false);
+            emp_hours_lbl.setVisible(false);
+            emp_hours_input.setVisible(false);
+            emp_salary_lbl.setVisible(true);
+            emp_salary_input.setVisible(true);
+        } else {
+            emp_rate_lbl.setVisible(true);
+            emp_rate_input.setVisible(true);
+            emp_hours_lbl.setVisible(true);
+            emp_hours_input.setVisible(true);
+            emp_salary_lbl.setVisible(false);
+            emp_salary_input.setVisible(false);
+        }
     }
     
     public ManagerUI(AddEmployeeController control, ListEmployeesController list, Connection connection) {
@@ -46,15 +64,6 @@ public class ManagerUI extends javax.swing.JFrame {
         con = control;
         conn = connection;
         output = list;
-    }
-    
-    private void viewActionPerformed(java.awt.event.ActionEvent evt) {
-//        String data = output.listEmployees();
-        // result.setText(data);
-    }
-    
-    private void addActionPerformed(java.awt.event.ActionEvent evt) {
-        
     }
     
     private void setLblColor(JLabel lbl) {
@@ -108,9 +117,9 @@ public class ManagerUI extends javax.swing.JFrame {
         employee_list_scrl_pane = new javax.swing.JScrollPane();
         employee_list_tbl = new javax.swing.JTable();
         employee_form_pnl = new javax.swing.JPanel();
-        new_emp_lbl = new javax.swing.JLabel();
+        emp_form_lbl = new javax.swing.JLabel();
         emp_id_input = new javax.swing.JTextField();
-        emp_name_lbl = new javax.swing.JLabel();
+        emp_id_lbl = new javax.swing.JLabel();
         emp_address_lbl = new javax.swing.JLabel();
         emp_address_input = new javax.swing.JTextField();
         emp_rate_lbl = new javax.swing.JLabel();
@@ -127,8 +136,8 @@ public class ManagerUI extends javax.swing.JFrame {
         emp_doj_date_lbl = new javax.swing.JLabel();
         emp_salary_input = new javax.swing.JTextField();
         emp_salary_lbl = new javax.swing.JLabel();
-        emp_name_input1 = new javax.swing.JTextField();
-        emp_name_lbl1 = new javax.swing.JLabel();
+        emp_name_input = new javax.swing.JTextField();
+        emp_name_lbl = new javax.swing.JLabel();
         update_employee_btn_lbl = new javax.swing.JLabel();
         delete_employee_pnl = new javax.swing.JPanel();
         delete_employee_lbl = new javax.swing.JLabel();
@@ -137,6 +146,7 @@ public class ManagerUI extends javax.swing.JFrame {
         delete_employee_btn_lbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         home_pnl.setBackground(new java.awt.Color(255, 255, 255));
         home_pnl.setLayout(null);
@@ -175,6 +185,8 @@ public class ManagerUI extends javax.swing.JFrame {
         user_login_heading_lbl.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         exit_pnl.setBackground(new java.awt.Color(0, 102, 204));
+        exit_pnl.setAlignmentX(0.0F);
+        exit_pnl.setAlignmentY(0.0F);
         exit_pnl.setPreferredSize(new java.awt.Dimension(40, 40));
 
         exit_lbl.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -214,16 +226,16 @@ public class ManagerUI extends javax.swing.JFrame {
             .addGroup(headerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
                 .addComponent(user_login_heading_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(exit_pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
                 .addComponent(exit_pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
             .addGroup(headerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -233,7 +245,7 @@ public class ManagerUI extends javax.swing.JFrame {
         );
 
         home_pnl.add(header);
-        header.setBounds(0, 0, 1041, 0);
+        header.setBounds(0, 0, 1042, 64);
 
         sidebar.setBackground(new java.awt.Color(0, 102, 204));
 
@@ -344,7 +356,7 @@ public class ManagerUI extends javax.swing.JFrame {
         );
 
         home_pnl.add(sidebar);
-        sidebar.setBounds(0, 0, 260, 0);
+        sidebar.setBounds(0, 0, 260, 587);
 
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setLayout(new java.awt.CardLayout());
@@ -376,13 +388,13 @@ public class ManagerUI extends javax.swing.JFrame {
 
         employee_form_pnl.setBackground(new java.awt.Color(255, 255, 255));
 
-        new_emp_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-        new_emp_lbl.setText("New Employee");
+        emp_form_lbl.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        emp_form_lbl.setText("New Employee");
 
         emp_id_input.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
-        emp_name_lbl.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        emp_name_lbl.setText("ID");
+        emp_id_lbl.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        emp_id_lbl.setText("ID");
 
         emp_address_lbl.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         emp_address_lbl.setText("Address");
@@ -402,7 +414,7 @@ public class ManagerUI extends javax.swing.JFrame {
         emp_rate_input.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
         emp_hours_lbl.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        emp_hours_lbl.setText("Contracted Hours");
+        emp_hours_lbl.setText("Hours");
 
         emp_hours_input.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         emp_hours_input.addActionListener(new java.awt.event.ActionListener() {
@@ -428,8 +440,14 @@ public class ManagerUI extends javax.swing.JFrame {
         emp_type_full_rdo_btn.setBackground(new java.awt.Color(255, 255, 255));
         emp_type_btn_grp.add(emp_type_full_rdo_btn);
         emp_type_full_rdo_btn.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        emp_type_full_rdo_btn.setSelected(true);
         emp_type_full_rdo_btn.setText("Full-time");
         emp_type_full_rdo_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        emp_type_full_rdo_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                emp_type_full_rdo_btnMouseClicked(evt);
+            }
+        });
         emp_type_full_rdo_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emp_type_full_rdo_btnActionPerformed(evt);
@@ -441,6 +459,11 @@ public class ManagerUI extends javax.swing.JFrame {
         emp_type_part_rdo_btn.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         emp_type_part_rdo_btn.setText("Part-time");
         emp_type_part_rdo_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        emp_type_part_rdo_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                emp_type_part_rdo_btnMouseClicked(evt);
+            }
+        });
         emp_type_part_rdo_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emp_type_part_rdo_btnActionPerformed(evt);
@@ -470,10 +493,10 @@ public class ManagerUI extends javax.swing.JFrame {
         emp_salary_lbl.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         emp_salary_lbl.setText("Salary");
 
-        emp_name_input1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        emp_name_input.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
-        emp_name_lbl1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        emp_name_lbl1.setText("Name");
+        emp_name_lbl.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        emp_name_lbl.setText("Name");
 
         update_employee_btn_lbl.setBackground(new java.awt.Color(0, 102, 204));
         update_employee_btn_lbl.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -496,95 +519,79 @@ public class ManagerUI extends javax.swing.JFrame {
             .addGroup(employee_form_pnlLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, employee_form_pnlLayout.createSequentialGroup()
-                        .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, employee_form_pnlLayout.createSequentialGroup()
-                                .addComponent(new_emp_lbl)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, employee_form_pnlLayout.createSequentialGroup()
-                                .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(emp_type_lbl)
-                                    .addComponent(emp_name_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(emp_address_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(emp_name_lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(emp_id_input, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
-                                    .addComponent(emp_address_input, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(employee_form_pnlLayout.createSequentialGroup()
-                                        .addComponent(emp_type_full_rdo_btn)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(emp_type_part_rdo_btn)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(emp_doj_date_lbl)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(emp_doj_date_input, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(emp_name_input1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, employee_form_pnlLayout.createSequentialGroup()
-                                .addComponent(emp_hours_lbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(emp_hours_input, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(employee_form_pnlLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(emp_salary_input, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(employee_form_pnlLayout.createSequentialGroup()
-                                            .addComponent(emp_email_lbl)
-                                            .addGap(125, 125, 125)
-                                            .addComponent(emp_email_input, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(employee_form_pnlLayout.createSequentialGroup()
-                                            .addComponent(emp_rate_lbl)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(emp_rate_input, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(51, 51, 51))
                     .addGroup(employee_form_pnlLayout.createSequentialGroup()
-                        .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(emp_hours_lbl)
+                            .addComponent(emp_type_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(emp_id_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emp_name_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emp_rate_lbl)
+                            .addComponent(emp_email_lbl)
                             .addComponent(emp_salary_lbl)
-                            .addGroup(employee_form_pnlLayout.createSequentialGroup()
-                                .addComponent(save_employee_btn_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(update_employee_btn_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(emp_address_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 37, Short.MAX_VALUE)
+                        .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(emp_id_input)
+                                .addComponent(emp_address_input, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(employee_form_pnlLayout.createSequentialGroup()
+                                    .addComponent(emp_type_full_rdo_btn)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(emp_type_part_rdo_btn)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(emp_doj_date_lbl)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(emp_doj_date_input, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(emp_name_input, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(emp_hours_input, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emp_salary_input, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emp_email_input, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emp_rate_input, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30))
+                    .addComponent(emp_form_lbl)
+                    .addGroup(employee_form_pnlLayout.createSequentialGroup()
+                        .addComponent(save_employee_btn_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(update_employee_btn_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         employee_form_pnlLayout.setVerticalGroup(
             employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(employee_form_pnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(new_emp_lbl)
+                .addGap(0, 0, 0)
+                .addComponent(emp_form_lbl)
                 .addGap(18, 18, 18)
                 .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emp_id_input, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emp_id_lbl))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emp_name_input, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emp_name_lbl))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(emp_name_lbl1)
-                    .addComponent(emp_name_input1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(emp_type_lbl)
                         .addComponent(emp_type_full_rdo_btn)
                         .addComponent(emp_type_part_rdo_btn)
-                        .addComponent(emp_doj_date_lbl))
+                        .addComponent(emp_doj_date_lbl)
+                        .addComponent(emp_type_lbl))
                     .addComponent(emp_doj_date_input, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 12, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(emp_address_input, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emp_address_lbl))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(emp_address_input, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emp_address_lbl, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emp_email_input, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emp_email_lbl))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emp_rate_input, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emp_rate_lbl))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emp_hours_input, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emp_hours_lbl))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emp_salary_input, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emp_salary_lbl))
@@ -679,68 +686,15 @@ public class ManagerUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
-        this.dispose();
-        new LoginUI().setVisible(true);
-    }//GEN-LAST:event_logoutMouseClicked
+    private void delete_employee_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delete_employee_btn_lblMouseClicked
+        int emp_id = Integer.parseInt(delete_employee_id_input.getText());
+        DeleteEmployeeController.deleteEmployee(emp_id);
+        this.sidebar_emp_list_btn_lblMouseClicked(evt);
+    }//GEN-LAST:event_delete_employee_btn_lblMouseClicked
 
-    private void exit_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exit_lblMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_exit_lblMouseClicked
-
-    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xx, y - xy);
-    }//GEN-LAST:event_headerMouseDragged
-
-    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
-        setOpacity((float)0.8);
-        xx = evt.getX();
-        xy = evt.getY();
-    }//GEN-LAST:event_headerMousePressed
-
-    private void headerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseReleased
-        setOpacity((float)1.0);
-    }//GEN-LAST:event_headerMouseReleased
-
-    private void sidebar_emp_list_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebar_emp_list_btn_lblMouseClicked
-        setLblColor(sidebar_emp_list_btn_lbl);
-        resetLblColor(sidebar_add_emp_btn_lbl);
-        resetLblColor(sidebar_update_emp_btn_lbl);
-        resetLblColor(sidebar_delete_emp_btn_lbl);
-
-        employee_form_pnl.setVisible(false);
-        employee_list_scrl_pane.setVisible(true);
-        delete_employee_pnl.setVisible(false);
-        
-        DefaultTableModel etm = (DefaultTableModel)employee_list_tbl.getModel();
-        ListEmployeesController.listEmployees(etm);
-    }//GEN-LAST:event_sidebar_emp_list_btn_lblMouseClicked
-
-    private void sidebar_add_emp_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebar_add_emp_btn_lblMouseClicked
-        resetLblColor(sidebar_emp_list_btn_lbl);
-        setLblColor(sidebar_add_emp_btn_lbl);
-        resetLblColor(sidebar_update_emp_btn_lbl);
-        resetLblColor(sidebar_delete_emp_btn_lbl);
-
-        employee_form_pnl.setVisible(true);
-        employee_list_scrl_pane.setVisible(false);
-        delete_employee_pnl.setVisible(false);
-
-        emp_doj_date_input.setDate(new Date());
-    }//GEN-LAST:event_sidebar_add_emp_btn_lblMouseClicked
-
-    private void sidebar_update_emp_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebar_update_emp_btn_lblMouseClicked
-        resetLblColor(sidebar_emp_list_btn_lbl);
-        resetLblColor(sidebar_add_emp_btn_lbl);
-        setLblColor(sidebar_update_emp_btn_lbl);
-        resetLblColor(sidebar_delete_emp_btn_lbl);
-
-        employee_form_pnl.setVisible(true);
-        employee_list_scrl_pane.setVisible(false);
-        delete_employee_pnl.setVisible(false);
-    }//GEN-LAST:event_sidebar_update_emp_btn_lblMouseClicked
+    private void delete_employee_id_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_employee_id_inputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_delete_employee_id_inputActionPerformed
 
     private void sidebar_delete_emp_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebar_delete_emp_btn_lblMouseClicked
         resetLblColor(sidebar_emp_list_btn_lbl);
@@ -753,76 +707,165 @@ public class ManagerUI extends javax.swing.JFrame {
         delete_employee_pnl.setVisible(true);
     }//GEN-LAST:event_sidebar_delete_emp_btn_lblMouseClicked
 
-    private void emp_address_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emp_address_inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emp_address_inputActionPerformed
+    private void sidebar_update_emp_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebar_update_emp_btn_lblMouseClicked
+        resetLblColor(sidebar_emp_list_btn_lbl);
+        resetLblColor(sidebar_add_emp_btn_lbl);
+        setLblColor(sidebar_update_emp_btn_lbl);
+        resetLblColor(sidebar_delete_emp_btn_lbl);
 
-    private void save_employee_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_save_employee_btn_lblMouseClicked
+        employee_form_pnl.setVisible(true);
+        employee_list_scrl_pane.setVisible(false);
+        delete_employee_pnl.setVisible(false);
+        
+        emp_form_lbl.setText("View / Update Employee");
+        emp_doj_date_input.setDate(new Date());
+        emp_id_input.setVisible(true);
+        emp_id_lbl.setVisible(true);
+        update_employee_btn_lbl.setVisible(true);
+        save_employee_btn_lbl.setVisible(false);
+    }//GEN-LAST:event_sidebar_update_emp_btn_lblMouseClicked
+
+    private void sidebar_add_emp_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebar_add_emp_btn_lblMouseClicked
+        resetLblColor(sidebar_emp_list_btn_lbl);
+        setLblColor(sidebar_add_emp_btn_lbl);
+        resetLblColor(sidebar_update_emp_btn_lbl);
+        resetLblColor(sidebar_delete_emp_btn_lbl);
+
+        employee_form_pnl.setVisible(true);
+        employee_list_scrl_pane.setVisible(false);
+        delete_employee_pnl.setVisible(false);
+
+        emp_form_lbl.setText("New Employee");
+        emp_doj_date_input.setDate(new Date());
+        emp_id_input.setVisible(false);
+        emp_id_lbl.setVisible(false);
+        update_employee_btn_lbl.setVisible(false);
+        save_employee_btn_lbl.setVisible(true);
+    }//GEN-LAST:event_sidebar_add_emp_btn_lblMouseClicked
+
+    private void sidebar_emp_list_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebar_emp_list_btn_lblMouseClicked
+        setLblColor(sidebar_emp_list_btn_lbl);
+        resetLblColor(sidebar_add_emp_btn_lbl);
+        resetLblColor(sidebar_update_emp_btn_lbl);
+        resetLblColor(sidebar_delete_emp_btn_lbl);
+
+        employee_form_pnl.setVisible(false);
+        employee_list_scrl_pane.setVisible(true);
+        delete_employee_pnl.setVisible(false);
+
+        DefaultTableModel etm = (DefaultTableModel)employee_list_tbl.getModel();
+        ListEmployeesController.listEmployees(etm);
+    }//GEN-LAST:event_sidebar_emp_list_btn_lblMouseClicked
+
+    private void headerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseReleased
+        setOpacity((float)1.0);
+    }//GEN-LAST:event_headerMouseReleased
+
+    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
+        setOpacity((float)0.8);
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_headerMousePressed
+
+    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_headerMouseDragged
+
+    private void exit_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exit_lblMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exit_lblMouseClicked
+
+    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
+        this.dispose();
+        new LoginUI().setVisible(true);
+    }//GEN-LAST:event_logoutMouseClicked
+
+    private void update_employee_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_update_employee_btn_lblMouseClicked
         int id = Integer.parseInt(emp_id_input.getText());
-        String name = emp_id_input.getText();
-        if(emp_type_full_rdo_btn.isSelected()) {
-            String type = "Full-time";
-        } else if(emp_type_part_rdo_btn.isSelected()) {
-            String type = "Part-time";
-        }
+        String name = emp_name_input.getText();
         String email = emp_email_input.getText();
         String address = emp_address_input.getText();
         Date doj = emp_doj_date_input.getDate();
 
-//        PreparedStatement ps;
-//        int rs;
-//        String queryInvoices = "INSERT INTO `inv_employees` (name, description, unit_price, discount) VALUES (?, ?, ?, ?)";
-//
-//        try {
-//
-//            ps = DbConnection.getConnection().prepareStatement(queryInvoices);
-//
-//            ps.setString(1, name);
-//            ps.setString(2, description);
-//            ps.setFloat(3, unit_price);
-//            ps.setFloat(4, discount);
-//
-//            rs = ps.executeUpdate();
-//            if(rs > 0) {
-//                JOptionPane.showMessageDialog(this, "Product added!");
-//                this.sidebar_employee_list_btn_lblMouseClicked(evt);
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Product could not be added!");
-//            }
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(this, ex);
-//        }
-    }//GEN-LAST:event_save_employee_btn_lblMouseClicked
-
-    private void delete_employee_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delete_employee_btn_lblMouseClicked
-        int emp_id = Integer.parseInt(delete_employee_id_input.getText());
-        DeleteEmployeeController.deleteEmployee(emp_id);
+        if (emp_type_full_rdo_btn.isSelected()) {
+            UpdateEmployeeController.updateEmployee(id, name, "Full-time", email, address, doj);
+        } else {
+            UpdateEmployeeController.updateEmployee(id, name, "Part-time", email, address, doj);
+        }
         this.sidebar_emp_list_btn_lblMouseClicked(evt);
-    }//GEN-LAST:event_delete_employee_btn_lblMouseClicked
-
-    private void delete_employee_id_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_employee_id_inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_delete_employee_id_inputActionPerformed
-
-    private void emp_type_full_rdo_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emp_type_full_rdo_btnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emp_type_full_rdo_btnActionPerformed
-
-    private void emp_type_part_rdo_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emp_type_part_rdo_btnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emp_type_part_rdo_btnActionPerformed
-
-    private void emp_hours_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emp_hours_inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emp_hours_inputActionPerformed
+    }//GEN-LAST:event_update_employee_btn_lblMouseClicked
 
     private void emp_salary_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emp_salary_inputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emp_salary_inputActionPerformed
 
-    private void update_employee_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_update_employee_btn_lblMouseClicked
+    private void emp_type_part_rdo_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emp_type_part_rdo_btnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_update_employee_btn_lblMouseClicked
+    }//GEN-LAST:event_emp_type_part_rdo_btnActionPerformed
+
+    private void emp_type_part_rdo_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emp_type_part_rdo_btnMouseClicked
+        if(emp_type_part_rdo_btn.isSelected()) {
+            emp_rate_lbl.setVisible(true);
+            emp_rate_input.setVisible(true);
+            emp_hours_lbl.setVisible(true);
+            emp_hours_input.setVisible(true);
+            emp_salary_lbl.setVisible(false);
+            emp_salary_input.setVisible(false);
+        } else {
+            emp_rate_lbl.setVisible(false);
+            emp_rate_input.setVisible(false);
+            emp_hours_lbl.setVisible(false);
+            emp_hours_input.setVisible(false);
+            emp_salary_lbl.setVisible(true);
+            emp_salary_input.setVisible(true);
+        }
+    }//GEN-LAST:event_emp_type_part_rdo_btnMouseClicked
+
+    private void emp_type_full_rdo_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emp_type_full_rdo_btnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emp_type_full_rdo_btnActionPerformed
+
+    private void emp_type_full_rdo_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emp_type_full_rdo_btnMouseClicked
+        if(emp_type_full_rdo_btn.isSelected()) {
+            emp_rate_lbl.setVisible(false);
+            emp_rate_input.setVisible(false);
+            emp_hours_lbl.setVisible(false);
+            emp_hours_input.setVisible(false);
+            emp_salary_lbl.setVisible(true);
+            emp_salary_input.setVisible(true);
+        } else {
+            emp_rate_lbl.setVisible(true);
+            emp_rate_input.setVisible(true);
+            emp_hours_lbl.setVisible(true);
+            emp_hours_input.setVisible(true);
+            emp_salary_lbl.setVisible(false);
+            emp_salary_input.setVisible(false);
+        }
+    }//GEN-LAST:event_emp_type_full_rdo_btnMouseClicked
+
+    private void save_employee_btn_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_save_employee_btn_lblMouseClicked
+        String name = emp_name_input.getText();
+        String email = emp_email_input.getText();
+        String address = emp_address_input.getText();
+        Date doj = emp_doj_date_input.getDate();
+
+        if(emp_type_full_rdo_btn.isSelected()) {
+            AddEmployeeController.addEmployee(name, "Full-time", email, address, doj);
+        } else {
+            AddEmployeeController.addEmployee(name, "Part-time", email, address, doj);
+        }
+        this.sidebar_emp_list_btn_lblMouseClicked(evt);
+    }//GEN-LAST:event_save_employee_btn_lblMouseClicked
+
+    private void emp_hours_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emp_hours_inputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emp_hours_inputActionPerformed
+
+    private void emp_address_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emp_address_inputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emp_address_inputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -870,12 +913,13 @@ public class ManagerUI extends javax.swing.JFrame {
     private javax.swing.JLabel emp_doj_date_lbl;
     private javax.swing.JTextField emp_email_input;
     private javax.swing.JLabel emp_email_lbl;
+    private javax.swing.JLabel emp_form_lbl;
     private javax.swing.JTextField emp_hours_input;
     private javax.swing.JLabel emp_hours_lbl;
     private javax.swing.JTextField emp_id_input;
-    private javax.swing.JTextField emp_name_input1;
+    private javax.swing.JLabel emp_id_lbl;
+    private javax.swing.JTextField emp_name_input;
     private javax.swing.JLabel emp_name_lbl;
-    private javax.swing.JLabel emp_name_lbl1;
     private javax.swing.JTextField emp_rate_input;
     private javax.swing.JLabel emp_rate_lbl;
     private javax.swing.JTextField emp_salary_input;
@@ -893,7 +937,6 @@ public class ManagerUI extends javax.swing.JFrame {
     private javax.swing.JPanel home_pnl;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel logout;
-    private javax.swing.JLabel new_emp_lbl;
     private javax.swing.JLabel save_employee_btn_lbl;
     private javax.swing.JPanel sidebar;
     private javax.swing.JLabel sidebar_add_emp_btn_lbl;

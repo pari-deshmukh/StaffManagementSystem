@@ -5,10 +5,22 @@
  */
 package StaffManagement.BusinessLogic.EmployeeManagement;
 
+import StaffManagement.DataPersistence.EmployeeRepoImpl;
+import StaffManagement.DomainData.Employee;
+import StaffManagement.DomainData.EmployeeFactory;
+import java.util.Date;
+
 /**
  *
  * @author ssarkar
  */
 public class UpdateEmployeeController {
+    
+     public static void updateEmployee(int id, String name, String type, String email, String address, Date doj) {
+        EmployeeFactory empFactory = new EmployeeFactory();
+        Employee emp = empFactory.emp(id, name, type, email, address, doj);        
+        EmployeeRepoImpl eri = new EmployeeRepoImpl();
+        eri.update(emp);
+    }
     
 }
