@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package StaffManagement.DomainData;
-
 import java.util.Date;
-
 /**
  *
  * @author pdeshmukh
@@ -17,8 +15,7 @@ public abstract class Employee {
     private Date doj;
     
     public Employee() {
-    }
-    
+    }    
     public int getId() {
         return id;
     }
@@ -37,7 +34,6 @@ public abstract class Employee {
     public Date getDoj() {
         return doj;
     }
-    
     public void setId(int id) {
         this.id = id;
     }

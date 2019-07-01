@@ -13,7 +13,8 @@ import java.util.Date;
  */
 public class EmployeeFactory {
     
-    public Employee emp(int id, String name, String empType, String email, String address, Date doj, double salary, double rate, double hours) {
+    public Employee emp(int id, String name, String empType, String email, 
+            String address, Date doj, double salary, double rate, double hours){
         if(empType == null) {
             return null;
         }

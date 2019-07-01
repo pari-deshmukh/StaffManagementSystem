@@ -49,7 +49,8 @@ public class EmployeeRepoImpl implements EmployeeRepo {
                 double hours = rs.getDouble("hours");
                 
                 EmployeeFactory empFactory = new EmployeeFactory();
-                Employee emp = empFactory.emp(id, name, emp_type, email, address, doj, salary, rate, hours);
+                Employee emp = empFactory.emp(id, name, emp_type, email, 
+                        address, doj, salary, rate, hours);
 
                 list.add(emp);
             }

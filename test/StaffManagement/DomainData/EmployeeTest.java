@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author ssarkar
+ * @author pdeshmukh
  */
 public class EmployeeTest {
     
@@ -47,66 +47,6 @@ public class EmployeeTest {
         Employee instance = new EmployeeImpl();
         int expResult = 0;
         int result = instance.getId();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getName method, of class Employee.
-     */
-    @Test
-    public void testGetName() {
-        System.out.println("getName");
-        Employee instance = new EmployeeImpl();
-        String expResult = "";
-        String result = instance.getName();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getType method, of class Employee.
-     */
-    @Test
-    public void testGetType() {
-        System.out.println("getType");
-        Employee instance = new EmployeeImpl();
-        String expResult = "";
-        String result = instance.getType();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getEmail method, of class Employee.
-     */
-    @Test
-    public void testGetEmail() {
-        System.out.println("getEmail");
-        Employee instance = new EmployeeImpl();
-        String expResult = "";
-        String result = instance.getEmail();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getAddress method, of class Employee.
-     */
-    @Test
-    public void testGetAddress() {
-        System.out.println("getAddress");
-        Employee instance = new EmployeeImpl();
-        String expResult = "";
-        String result = instance.getAddress();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getDoj method, of class Employee.
-     */
-    @Test
-    public void testGetDoj() {
-        System.out.println("getDoj");
-        Employee instance = new EmployeeImpl();
-        Date expResult = null;
-        Date result = instance.getDoj();
         assertEquals(expResult, result);
     }
 
