@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package StaffManagement.BusinessLogic.EmployeeManagement;
+package StaffManagement.BusinessLogic;
 
 import StaffManagement.DataPersistence.EmployeeRepoImpl;
+import StaffManagement.DomainData.Employee;
 
 /**
  *
- * @author ssarkar
+ * @author pdeshmukh
  */
-public class DeleteEmployeeController {
-    
-    public static void deleteEmployee(int id) {
+public class GetEmployeeController {
+    public static Employee getEmployee(int id) {
         EmployeeRepoImpl eri = new EmployeeRepoImpl();
-        eri.delete(id);
+        return eri.read(id);
     }
 }

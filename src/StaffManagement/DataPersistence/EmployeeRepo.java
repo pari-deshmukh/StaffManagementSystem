@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author ssarkar
+ * @author pdeshmukh
  */
 public interface EmployeeRepo {
     public ArrayList list();

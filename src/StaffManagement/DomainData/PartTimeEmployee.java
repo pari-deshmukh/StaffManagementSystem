@@ -7,7 +7,7 @@ package StaffManagement.DomainData;
 
 /**
  *
- * @author ssarkar
+ * @author pdeshmukh
  */
 public class PartTimeEmployee extends Employee{
     

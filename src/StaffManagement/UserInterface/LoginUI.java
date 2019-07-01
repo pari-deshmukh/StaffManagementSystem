@@ -9,7 +9,7 @@ import StaffManagement.BusinessLogic.ResetPasswordController;
 import javax.swing.JOptionPane;
 /**
  *
- * @author ssarkar
+ * @author pdeshmukh
  */
 public class LoginUI extends javax.swing.JFrame {
 
@@ -85,7 +85,7 @@ public class LoginUI extends javax.swing.JFrame {
         back.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         back.setForeground(new java.awt.Color(255, 255, 255));
         back.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/StaffManagement/UserInterface/Images/back.png"))); // NOI18N
+        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/StaffManagement/UserInterface/back.png"))); // NOI18N
         back.setToolTipText("Return to Log In Screen");
         back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         back.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -112,7 +112,7 @@ public class LoginUI extends javax.swing.JFrame {
         });
 
         user_icon_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        user_icon_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/StaffManagement/UserInterface/Images/user.png"))); // NOI18N
+        user_icon_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/StaffManagement/UserInterface/user.png"))); // NOI18N
 
         emp_mgmt_login_lbl.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         emp_mgmt_login_lbl.setForeground(new java.awt.Color(255, 255, 255));
@@ -145,7 +145,7 @@ public class LoginUI extends javax.swing.JFrame {
         exit_lbl.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         exit_lbl.setForeground(new java.awt.Color(255, 255, 255));
         exit_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        exit_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/StaffManagement/UserInterface/Images/close.png"))); // NOI18N
+        exit_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/StaffManagement/UserInterface/close.png"))); // NOI18N
         exit_lbl.setToolTipText("Exit");
         exit_lbl.setAlignmentY(0.0F);
         exit_lbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

@@ -16,7 +16,7 @@ import StaffManagement.DataPersistence.DbConnection;
 
 /**
  *
- * @author ssarkar
+ * @author pdeshmukh
  */
 public class ResetPasswordController {
     

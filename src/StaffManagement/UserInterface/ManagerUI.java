@@ -5,11 +5,11 @@
  */
 package StaffManagement.UserInterface;
 
-import StaffManagement.BusinessLogic.EmployeeManagement.AddEmployeeController;
-import StaffManagement.BusinessLogic.EmployeeManagement.DeleteEmployeeController;
-import StaffManagement.BusinessLogic.EmployeeManagement.GetEmployeeController;
-import StaffManagement.BusinessLogic.EmployeeManagement.ListEmployeesController;
-import StaffManagement.BusinessLogic.EmployeeManagement.UpdateEmployeeController;
+import StaffManagement.BusinessLogic.AddEmployeeController;
+import StaffManagement.BusinessLogic.DeleteEmployeeController;
+import StaffManagement.BusinessLogic.GetEmployeeController;
+import StaffManagement.BusinessLogic.ListEmployeesController;
+import StaffManagement.BusinessLogic.UpdateEmployeeController;
 import StaffManagement.DataPersistence.EmployeeRepoImpl;
 import StaffManagement.DomainData.Employee;
 import java.awt.Color;
@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ssarkar
+ * @author pdeshmukh
  */
 public class ManagerUI extends javax.swing.JFrame {
 
@@ -171,7 +171,7 @@ public class ManagerUI extends javax.swing.JFrame {
         logout.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         logout.setForeground(new java.awt.Color(255, 255, 255));
         logout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/StaffManagement/UserInterface/Images/logout.png"))); // NOI18N
+        logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/StaffManagement/UserInterface/logout.png"))); // NOI18N
         logout.setToolTipText("Log Out");
         logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logout.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -194,7 +194,7 @@ public class ManagerUI extends javax.swing.JFrame {
         exit_lbl.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         exit_lbl.setForeground(new java.awt.Color(255, 255, 255));
         exit_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        exit_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/StaffManagement/UserInterface/Images/close.png"))); // NOI18N
+        exit_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/StaffManagement/UserInterface/close.png"))); // NOI18N
         exit_lbl.setToolTipText("Exit");
         exit_lbl.setAlignmentY(0.0F);
         exit_lbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -235,12 +235,14 @@ public class ManagerUI extends javax.swing.JFrame {
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exit_pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(headerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(user_login_heading_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(exit_pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(headerLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(user_login_heading_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

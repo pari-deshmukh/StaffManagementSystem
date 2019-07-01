@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package StaffManagement.BusinessLogic.EmployeeManagement;
+package StaffManagement.BusinessLogic;
 
 import StaffManagement.DataPersistence.EmployeeRepoImpl;
 import StaffManagement.DomainData.Employee;
@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  *
- * @author ssarkar
+ * @author pdeshmukh
  */
 public class UpdateEmployeeController {
     

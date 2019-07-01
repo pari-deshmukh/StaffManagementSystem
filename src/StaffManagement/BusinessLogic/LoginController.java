@@ -16,7 +16,7 @@ import StaffManagement.DataPersistence.DbConnection;
 
 /**
  *
- * @author ssarkar
+ * @author pdeshmukh
  */
 public class LoginController {
     public static Boolean attempt_login(String username, String password) {
