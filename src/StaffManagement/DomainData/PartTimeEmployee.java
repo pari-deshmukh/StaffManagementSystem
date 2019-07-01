@@ -11,7 +11,7 @@ package StaffManagement.DomainData;
  */
 public class PartTimeEmployee extends Employee{
     
-    private double rate, contracted_hours;
+    private double rate, hours;
     
     public PartTimeEmployee() {
     }
@@ -20,15 +20,15 @@ public class PartTimeEmployee extends Employee{
         return rate;
     }
     
-    public double getContractedHours() {
-        return contracted_hours;
+    public double getHours() {
+        return hours;
     }
     
     public void setRate(double rate) {
         this.rate = rate;
     }
     
-    public void setContractedHours(double contracted_hours) {
-        this.contracted_hours = contracted_hours;
+    public void setHours(double hours) {
+        this.hours = hours;
     }
 }

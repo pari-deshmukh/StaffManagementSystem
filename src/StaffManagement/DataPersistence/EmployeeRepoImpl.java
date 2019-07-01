@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,9 +38,18 @@ public class EmployeeRepoImpl implements EmployeeRepo {
             rs = ps.executeQuery();
 
             while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String emp_type = rs.getString("emp_type");
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                Date doj = rs.getDate("doj");
+                double salary = rs.getDouble("salary");
+                double rate = rs.getDouble("rate");
+                double hours = rs.getDouble("hours");
+                
                 EmployeeFactory empFactory = new EmployeeFactory();
-
-                Employee emp = empFactory.emp(rs.getInt("id"), rs.getString("name"), rs.getString("emp_type"), rs.getString("email"), rs.getString("address"), rs.getDate("doj"));
+                Employee emp = empFactory.emp(id, name, emp_type, email, address, doj, salary, rate, hours);
 
                 list.add(emp);
             }
@@ -74,20 +84,29 @@ public class EmployeeRepoImpl implements EmployeeRepo {
 
     @Override
     public Employee read(int id) {
-        query = "Select * FROM `emp_employees` where id=`" + id + "'";
+        query = "Select * FROM `emp_employees` where id = ?";
 
         try {
             ps = DbConnection.getConnection().prepareStatement(query);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
 
             while (rs.next()) {
+                String name = rs.getString("name");
+                String emp_type = rs.getString("emp_type");
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                Date doj = rs.getDate("doj");
+                double salary = rs.getDouble("salary");
+                double rate = rs.getDouble("rate");
+                double hours = rs.getDouble("hours");
+                
                 EmployeeFactory empFactory = new EmployeeFactory();
-
-                employee = empFactory.emp(rs.getInt("id"), rs.getString("name"), rs.getString("emp_type"), rs.getString("email"), rs.getString("address"), rs.getDate("doj"));
-
-                rs.close();
-                ps.close();
+                employee = empFactory.emp(id, name, emp_type, email, address, doj, salary, rate, hours);
             }
+            
+            rs.close();
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeRepoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

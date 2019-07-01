@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class EmployeeFactory {
     
-    public Employee emp(int id, String name, String empType, String email, String address, Date doj) {
+    public Employee emp(int id, String name, String empType, String email, String address, Date doj, double salary, double rate, double hours) {
         if(empType == null) {
             return null;
         }
@@ -27,6 +27,8 @@ public class EmployeeFactory {
             emp.setEmail(email);
             emp.setAddress(address);
             emp.setDoj(doj);
+            emp.setHours(hours);
+            emp.setRate(rate);
             emp.setType("Part-time");
             return emp;
         } 
@@ -39,6 +41,7 @@ public class EmployeeFactory {
             emp.setEmail(email);
             emp.setAddress(address);
             emp.setDoj(doj);
+            emp.setSalary(salary);
             emp.setType("Full-time");
             return emp;
         }

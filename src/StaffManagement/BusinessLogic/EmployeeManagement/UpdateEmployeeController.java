@@ -16,9 +16,9 @@ import java.util.Date;
  */
 public class UpdateEmployeeController {
     
-     public static void updateEmployee(int id, String name, String type, String email, String address, Date doj) {
+     public static void updateEmployee(int id, String name, String type, String email, String address, Date doj, double salary, double rate, double hours) {
         EmployeeFactory empFactory = new EmployeeFactory();
-        Employee emp = empFactory.emp(id, name, type, email, address, doj);        
+        Employee emp = empFactory.emp(id, name, type, email, address, doj, salary, rate, hours);        
         EmployeeRepoImpl eri = new EmployeeRepoImpl();
         eri.update(emp);
     }

@@ -17,9 +17,9 @@ import java.util.Date;
  */
 public class AddEmployeeController {
 
-    public static void addEmployee(String name, String type, String email, String address, Date doj) {
+    public static void addEmployee(String name, String type, String email, String address, Date doj, double salary, double rate, double hours) {
         EmployeeFactory empFactory = new EmployeeFactory();
-        Employee emp = empFactory.emp(-1, name, type, email, address, doj);        
+        Employee emp = empFactory.emp(-1, name, type, email, address, doj, salary, rate, hours);        
         EmployeeRepoImpl eri = new EmployeeRepoImpl();
         eri.create(emp);
     }

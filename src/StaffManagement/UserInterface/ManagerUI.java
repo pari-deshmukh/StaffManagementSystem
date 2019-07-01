@@ -7,9 +7,11 @@ package StaffManagement.UserInterface;
 
 import StaffManagement.BusinessLogic.EmployeeManagement.AddEmployeeController;
 import StaffManagement.BusinessLogic.EmployeeManagement.DeleteEmployeeController;
+import StaffManagement.BusinessLogic.EmployeeManagement.GetEmployeeController;
 import StaffManagement.BusinessLogic.EmployeeManagement.ListEmployeesController;
 import StaffManagement.BusinessLogic.EmployeeManagement.UpdateEmployeeController;
 import StaffManagement.DataPersistence.EmployeeRepoImpl;
+import StaffManagement.DomainData.Employee;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -233,9 +235,7 @@ public class ManagerUI extends javax.swing.JFrame {
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerLayout.createSequentialGroup()
-                .addComponent(exit_pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+            .addComponent(exit_pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(headerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -365,17 +365,17 @@ public class ManagerUI extends javax.swing.JFrame {
 
         employee_list_tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Type", "Email", "Address", "Date of Joining", "Salary", "Hourly Rate", "Contracted Hours"
+                "ID", "Name", "Type", "Email", "Address", "Date of Joining"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -392,6 +392,11 @@ public class ManagerUI extends javax.swing.JFrame {
         emp_form_lbl.setText("New Employee");
 
         emp_id_input.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        emp_id_input.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                emp_id_inputKeyReleased(evt);
+            }
+        });
 
         emp_id_lbl.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         emp_id_lbl.setText("ID");
@@ -563,7 +568,7 @@ public class ManagerUI extends javax.swing.JFrame {
                 .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emp_id_input, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emp_id_lbl))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(employee_form_pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emp_name_input, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emp_name_lbl))
@@ -788,11 +793,26 @@ public class ManagerUI extends javax.swing.JFrame {
         String email = emp_email_input.getText();
         String address = emp_address_input.getText();
         Date doj = emp_doj_date_input.getDate();
-
-        if (emp_type_full_rdo_btn.isSelected()) {
-            UpdateEmployeeController.updateEmployee(id, name, "Full-time", email, address, doj);
+        
+        double salary = -1;
+        double rate = -1;
+        double hours = -1;
+        if(emp_salary_input.getText() == null || emp_salary_input.getText().equals("")) {
         } else {
-            UpdateEmployeeController.updateEmployee(id, name, "Part-time", email, address, doj);
+            salary = Double.parseDouble(emp_salary_input.getText());
+        }
+        if(emp_rate_input.getText() == null || emp_rate_input.getText().equals("")) {
+        } else {
+            rate = Double.parseDouble(emp_rate_input.getText());
+        }
+        if(emp_hours_input.getText() == null || emp_hours_input.getText().equals("")) {
+        } else {
+            hours = Double.parseDouble(emp_hours_input.getText());
+        }
+        if (emp_type_full_rdo_btn.isSelected()) {
+            UpdateEmployeeController.updateEmployee(id, name, "Full-time", email, address, doj, salary, rate, hours);
+        } else {
+            UpdateEmployeeController.updateEmployee(id, name, "Part-time", email, address, doj, salary, rate, hours);
         }
         this.sidebar_emp_list_btn_lblMouseClicked(evt);
     }//GEN-LAST:event_update_employee_btn_lblMouseClicked
@@ -849,12 +869,28 @@ public class ManagerUI extends javax.swing.JFrame {
         String name = emp_name_input.getText();
         String email = emp_email_input.getText();
         String address = emp_address_input.getText();
+        double salary = -1;
+        double rate = -1;
+        double hours = -1;
+        if(emp_salary_input.getText() == null || emp_salary_input.getText().equals("")) {
+        } else {
+            salary = Double.parseDouble(emp_salary_input.getText());
+        }
+        if(emp_rate_input.getText() == null || emp_rate_input.getText().equals("")) {
+        } else {
+            rate = Double.parseDouble(emp_rate_input.getText());
+        }
+        if(emp_hours_input.getText() == null || emp_hours_input.getText().equals("")) {
+        } else {
+            hours = Double.parseDouble(emp_hours_input.getText());
+        }
+        
         Date doj = emp_doj_date_input.getDate();
 
         if(emp_type_full_rdo_btn.isSelected()) {
-            AddEmployeeController.addEmployee(name, "Full-time", email, address, doj);
+            AddEmployeeController.addEmployee(name, "Full-time", email, address, doj, salary, rate, hours);
         } else {
-            AddEmployeeController.addEmployee(name, "Part-time", email, address, doj);
+            AddEmployeeController.addEmployee(name, "Part-time", email, address, doj, salary, rate, hours);
         }
         this.sidebar_emp_list_btn_lblMouseClicked(evt);
     }//GEN-LAST:event_save_employee_btn_lblMouseClicked
@@ -866,6 +902,39 @@ public class ManagerUI extends javax.swing.JFrame {
     private void emp_address_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emp_address_inputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emp_address_inputActionPerformed
+
+    private void emp_id_inputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emp_id_inputKeyReleased
+        if(emp_id_input.getText() == null || emp_id_input.getText().equals("")) {
+        } else {
+            int id = Integer.parseInt(emp_id_input.getText());
+            Employee emp = GetEmployeeController.getEmployee(id);
+            if(emp != null) {
+                emp_name_input.setText(emp.getName());
+                emp_email_input.setText(emp.getEmail());
+                emp_address_input.setText(emp.getAddress());
+                emp_doj_date_input.setDate(emp.getDoj());
+                if (emp.getType().equalsIgnoreCase("Full-time")) {
+                    emp_type_full_rdo_btn.setSelected(true);
+                    emp_type_part_rdo_btn.setSelected(false);
+                    emp_rate_lbl.setVisible(false);
+                    emp_rate_input.setVisible(false);
+                    emp_hours_lbl.setVisible(false);
+                    emp_hours_input.setVisible(false);
+                    emp_salary_lbl.setVisible(true);
+                    emp_salary_input.setVisible(true);
+                } else if (emp.getType().equalsIgnoreCase("Part-time")) {
+                    emp_type_full_rdo_btn.setSelected(false);
+                    emp_type_part_rdo_btn.setSelected(true);
+                    emp_rate_lbl.setVisible(true);
+                    emp_rate_input.setVisible(true);
+                    emp_hours_lbl.setVisible(true);
+                    emp_hours_input.setVisible(true);
+                    emp_salary_lbl.setVisible(false);
+                    emp_salary_input.setVisible(false);
+                }
+            } 
+        }
+    }//GEN-LAST:event_emp_id_inputKeyReleased
 
     /**
      * @param args the command line arguments
